@@ -7,6 +7,7 @@ import DashboardLayout from "@/layouts/DashboardLayout";
 import { useAuth } from "@/context/AuthContext";
 import ResumeDetail from "@/pages/ResumeDetail";
 import LandingPage from "@/pages/landing/LandingPage";
+import MyResumes from "@/pages/MyResumes";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -27,7 +28,9 @@ function App() {
             </ProtectedRoute>
           }
         >
+          
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/resumes" element={<MyResumes />} />
           <Route path="/resumes/:id" element={<ResumeDetail />} />
         </Route>
         <Route path="/" element={<LandingPage />} />{" "}
