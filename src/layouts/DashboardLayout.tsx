@@ -1,6 +1,6 @@
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -66,6 +66,11 @@ export default function DashboardLayout() {
                 <p className="font-medium">{user?.fullName}</p>
                 <p className="text-muted-foreground text-xs">{user?.email}</p>
               </div>
+
+              <DropdownMenuItem onClick={() => navigate("/profile")}>
+                Profile
+              </DropdownMenuItem>
+
               <DropdownMenuItem
                 onClick={handleLogout}
                 className="text-destructive"

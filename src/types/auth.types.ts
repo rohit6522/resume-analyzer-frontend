@@ -21,3 +21,17 @@ export interface User {
   fullName: string;
   email: string;
 }
+
+export interface UserProfileResponse {
+  fullName: string;
+  email: string;
+  phone: string | null;
+  bio: string | null;
+  photoUrl: string | null;
+}
+
+export interface UpdateProfileRequest {
+  fullName: string;
+  phone?: string;
+  bio?: string;
+}

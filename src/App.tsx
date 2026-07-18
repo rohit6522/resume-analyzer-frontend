@@ -8,6 +8,8 @@ import { useAuth } from "@/context/AuthContext";
 import ResumeDetail from "@/pages/ResumeDetail";
 import LandingPage from "@/pages/landing/LandingPage";
 import MyResumes from "@/pages/MyResumes";
+import Profile from "@/pages/Profile";
+
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -32,6 +34,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/resumes" element={<MyResumes />} />
           <Route path="/resumes/:id" element={<ResumeDetail />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
         <Route path="/" element={<LandingPage />} />{" "}
       </Routes>
