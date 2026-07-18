@@ -6,6 +6,7 @@ import Dashboard from "@/pages/Dashboard";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import { useAuth } from "@/context/AuthContext";
 import ResumeDetail from "@/pages/ResumeDetail";
+import LandingPage from "@/pages/landing/LandingPage";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -19,7 +20,6 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
         <Route
           element={
             <ProtectedRoute>
@@ -30,8 +30,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/resumes/:id" element={<ResumeDetail />} />
         </Route>
-
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/" element={<LandingPage />} />{" "}
       </Routes>
     </>
   );
