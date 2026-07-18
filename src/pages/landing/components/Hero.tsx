@@ -31,7 +31,7 @@ export default function Hero() {
           AI-Powered Resume Analysis
         </div>
 
-        <h1 className="hero-title text-5xl md:text-7xl font-bold tracking-tight text-foreground mb-6">
+        <h1 className="hero-title text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-foreground mb-6">
           {titleWords.map((word, i) => (
             <span key={i} className="inline-block mr-4">
               {word}
