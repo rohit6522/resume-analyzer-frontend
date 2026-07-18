@@ -15,7 +15,7 @@ import type { UserProfileResponse } from "@/types/auth.types";
 const API_ORIGIN = import.meta.env.VITE_API_BASE_URL.replace("/api", "");
 
 export default function Profile() {
-  const { user, login, token } = useAuth();
+  const { login, token } = useAuth();
   const [profile, setProfile] = useState<UserProfileResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);

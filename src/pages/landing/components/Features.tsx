@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Sparkles, Target, FileCheck, TrendingUp, Zap, Shield } from "lucide-react";
+import type { Variants } from "framer-motion";
 
 const features = [
   {
@@ -43,7 +44,7 @@ const container = {
   },
 };
 
-const item = {
+const item: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };

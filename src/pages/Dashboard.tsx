@@ -5,7 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import FileUpload from "@/components/FileUpload";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+
 import { FileText, ArrowRight } from "lucide-react";
 import type { ResumeResponse } from "@/types/resume.types";
 
@@ -30,7 +30,7 @@ export default function Dashboard() {
     fetchResumes();
   }, []);
 
-  const activeResume = resumes.find((r) => r.active);
+
 
   return (
     <div className="space-y-8">
