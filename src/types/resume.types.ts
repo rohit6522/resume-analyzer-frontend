@@ -28,3 +28,12 @@ export interface AtsScoreResponse {
   weaknesses: string;
   suggestions: string;
 }
+
+export interface JobMatchResponse {
+  id: number;
+  matchPercentage: number;
+  matchedSkills: string;
+  missingSkills: string;
+  recommendations: string;
+  createdAt: string;
+}

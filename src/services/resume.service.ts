@@ -1,5 +1,5 @@
 import apiClient from "@/lib/axios";
-import type { ResumeResponse, ParsedResumeResponse, AtsScoreResponse } from "@/types/resume.types";
+import type { ResumeResponse, ParsedResumeResponse, AtsScoreResponse ,JobMatchResponse } from "@/types/resume.types";
 
 export const resumeService = {
   upload: async (file: File): Promise<ResumeResponse> => {
@@ -35,4 +35,11 @@ export const resumeService = {
     const response = await apiClient.get<AtsScoreResponse>(`/resumes/${id}/ats-score`);
     return response.data;
   },
+
+  matchJob: async (id: number, jobDescription: string): Promise<JobMatchResponse> => {
+  const response = await apiClient.post<JobMatchResponse>(`/resumes/${id}/match-job`, {
+    jobDescription,
+  });
+  return response.data;
+},
 };
