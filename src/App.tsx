@@ -30,7 +30,6 @@ function App() {
             </ProtectedRoute>
           }
         >
-          
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/resumes" element={<MyResumes />} />
           <Route path="/resumes/:id" element={<ResumeDetail />} />
