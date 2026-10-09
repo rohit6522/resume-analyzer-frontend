@@ -8,6 +8,7 @@ import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -19,6 +20,12 @@ import {
 export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
+  useEffect(() => {
+  if (sessionStorage.getItem("sessionExpired")) {
+    sessionStorage.removeItem("sessionExpired");
+    toast.info("Your session expired. Please sign in again.");
+  }
+}, []);
 
   const {
     register,

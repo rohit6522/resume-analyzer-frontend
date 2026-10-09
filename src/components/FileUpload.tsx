@@ -49,10 +49,11 @@ export default function FileUpload({ onUploadSuccess }: FileUploadProps) {
     if (file) handleFile(file);
   }, []);
 
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) handleFile(file);
-  };
+const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  e.target.value = ""; // lets the user pick the same file again after a failed upload
+  if (file) handleFile(file);
+};
 
   return (
     <div

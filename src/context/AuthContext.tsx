@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 import type { User } from "@/types/auth.types";
+import { isTokenExpired } from "@/lib/jwt";
 
 interface AuthContextType {
   user: User | null;
@@ -9,49 +10,60 @@ interface AuthContextType {
   logout: () => void;
 }
 
+interface Session {
+  token: string | null;
+  user: User | null;
+}
+
+const EMPTY_SESSION: Session = { token: null, user: null };
+
+function clearStoredSession() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+}
+
+function loadSession(): Session {
+  try {
+    const token = localStorage.getItem("token");
+    const rawUser = localStorage.getItem("user");
+    if (!token || !rawUser) return EMPTY_SESSION;
+
+    if (isTokenExpired(token)) {
+      clearStoredSession();
+      sessionStorage.setItem("sessionExpired", "1");
+      return EMPTY_SESSION;
+    }
+
+    return { token, user: JSON.parse(rawUser) as User };
+  } catch {
+    // Corrupted storage should never white-screen the app
+    clearStoredSession();
+    return EMPTY_SESSION;
+  }
+}
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [session, setSession] = useState<Session>(loadSession);
 
-  useEffect(() => {
-    // On app load, check if user was already logged in
-    const storedToken = localStorage.getItem("token");
-    const storedUser = localStorage.getItem("user");
-
-    if (storedToken && storedUser) {
-      setToken(storedToken);
-      setUser(JSON.parse(storedUser));
-    }
-    setIsLoading(false);
-  }, []);
-
-  const login = (newToken: string, newUser: User) => {
-    localStorage.setItem("token", newToken);
-    localStorage.setItem("user", JSON.stringify(newUser));
-    setToken(newToken);
-    setUser(newUser);
+  const login = (token: string, user: User) => {
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(user));
+    setSession({ token, user });
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setToken(null);
-    setUser(null);
+    clearStoredSession();
+    setSession(EMPTY_SESSION);
   };
-
-  if (isLoading) {
-    return null; // or a loading spinner later
-  }
 
   return (
     <AuthContext.Provider
       value={{
-        user,
-        token,
-        isAuthenticated: !!token,
+        user: session.user,
+        token: session.token,
+        isAuthenticated: !!session.token,
         login,
         logout,
       }}
