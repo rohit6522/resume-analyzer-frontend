@@ -27,6 +27,7 @@ export interface AtsScoreResponse {
   strengths: string;
   weaknesses: string;
   suggestions: string;
+  dateConsistencyNotes: string;
 }
 
 export interface JobMatchResponse {

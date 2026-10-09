@@ -198,6 +198,7 @@ export default function ResumeDetail() {
                 <TextBlock title="Strengths" content={atsScore.strengths} />
                 <TextBlock title="Weaknesses" content={atsScore.weaknesses} />
                 <TextBlock title="Suggestions" content={atsScore.suggestions} />
+                <TextBlock title="Date Consistency Check" content={atsScore.dateConsistencyNotes} />
               </div>
             </div>
           ) : (
